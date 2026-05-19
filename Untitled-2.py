@@ -70,4 +70,3 @@ print(f"\n{'='*50}")
 print(f"Total de linhas coletadas: {len(df_precos)}")
 print(f"{'='*50}")
 df_precos.head()
-S
