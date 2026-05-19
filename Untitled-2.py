@@ -64,9 +64,40 @@ for ticker in todos_tickers:
     else:
         print(f"❌ {ticker}: erro {resp.status_code}")
 
-# Juntar tudo num único DataFrame
-df_precos = pd.concat(lista_dfs, ignore_index=True)
-print(f"\n{'='*50}")
-print(f"Total de linhas coletadas: {len(df_precos)}")
-print(f"{'='*50}")
-df_precos.head()
+# %%
+# =============================================================
+#  COLETA DO IBOVESPA (BENCHMARK)
+#  Endpoint diferente: /preco/diversos (índices e outros)
+# =============================================================
+params_ibov = {
+    "ticker":   "IBOV",
+    "data_ini": DATA_INI,
+    "data_fim": DATA_FIM,
+}
+
+resp = requests.get(
+    f"{BASE_URL}/preco/diversos",
+    headers=HEADERS,
+    params=params_ibov,
+)
+
+df_ibov = pd.DataFrame(resp.json())
+
+print(f"Total de registros do Ibovespa: {len(df_ibov)}")
+print(f"Primeira data: {df_ibov['data'].min()}")
+print(f"Última data:   {df_ibov['data'].max()}")
+print()
+df_ibov.head()
+
+
+# %%
+# =============================================================
+#  RESUMO FINAL
+# =============================================================
+print("RESUMO DA COLETA")
+print("="*50)
+print(f"Ações coletadas: {df_precos['ticker'].nunique()}")
+print(f"Linhas de ações: {len(df_precos)}")
+print(f"Linhas do Ibovespa: {len(df_ibov)}")
+print(f"Período: {DATA_INI} a {DATA_FIM}")
+print("="*50)
