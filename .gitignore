@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDEs / Editores
+.vscode/
+.idea/
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Dados brutos (não vão para o repositório)
+/data/
+
+# Credenciais e variáveis de ambiente
+*.env
+.env.local
